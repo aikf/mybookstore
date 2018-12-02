@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xym.dao.BookMapper">
+
+    <insert id="addBook">
+        insert into book(id, name, price, author, image, description, category_id)
+        values(#{id},#{name},#{price},#{author},#{image},#{description},#{category_id})
+    </insert>
+
+    <select id="findBookById">
+        select * from book where id={#id}
+    </select>
+
+    <select id="findBookByCategory" parameterType="queryinfo" resultType="book">
+        select * from book
+        <where>
+            category=#{categoryId}
+        </where>
+        limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="getTotalRecord" resultType="long">
+        select count(*) from book
+    </select>
+
+</mapper>

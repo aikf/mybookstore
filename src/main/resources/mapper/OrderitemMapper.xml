@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xym.dao.OrderitemMapper">
+
+    <insert id="addOrderitem">
+        insert into orderitem(id, quantity, price, book_id, order_id)
+        values(#{oi.id},#{oi.quantity},#{oi.price},#{oi.book.id},#{id})
+    </insert>
+
+    <resultMap id="myItem" type="orderitem">
+        <id property="id" column="id"/>
+        <association property="book" select="com.xym.dao.BookMapper.findBookById" column="book_id"/>
+    </resultMap>
+
+    <select id="findItemByOrderId" resultMap="myItem">
+        select * from orderitem where order_id=#{id}
+    </select>
+
+</mapper>
