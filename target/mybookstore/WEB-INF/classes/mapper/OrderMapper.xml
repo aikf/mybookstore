@@ -6,7 +6,30 @@
 
     <insert id="addOrder">
         insert into orders(id, ordertime, state, price, user_id)
-        values(#{id},#{ordertime},#{state},#{price},#{user_id})
+        values(#{id},#{ordertime},#{state},#{price},#{user.id})
     </insert>
+
+    <resultMap id="myOrder" type="order">
+        <id column="id" property="id"/>
+        <association property="user" select="com.xym.dao.UserMapper.findUserById" column="user_id"/>
+        <collection property="orderitems" select="com.xym.dao.OrderitemMapper.findItemByOrderId" column="id"/>
+    </resultMap>
+
+    <select id="findOrderById" resultMap="myOrder">
+      select * from orders where id=#{id};
+    </select>
+
+    <resultMap id="stateOrder" type="order">
+        <id column="id" property="id"/>
+        <association property="user" select="com.xym.dao.UserMapper.findUserById" column="user_id"/>
+    </resultMap>
+
+    <select id="findOrderByState" resultMap="stateOrder">
+        select * from orders where state=#{state}
+    </select>
+
+    <update id="updateOrderState">
+        update orders set state=#{state} where id=#{id}
+    </update>
 
 </mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xym.dao.ManagerMapper">
+
+    <select id="findManager" parameterType="string" resultType="manager">
+        select * from manager where manager_name=#{name}
+    </select>
+    <select id="findRoles" resultType="string">
+        select role_name from manager_roles where manager_name=#{name}
+    </select>
+    <select id="findPermissions" resultType="string">
+        select permission from manager m,manager_roles r,permissions p where m.manager_name=r.manager_name and r.role_name=p.role_name and m.manager_name=#{name}
+    </select>
+</mapper>

@@ -28,4 +28,8 @@
         select * from orders where state=#{state}
     </select>
 
+    <update id="updateOrderState">
+        update orders set state=#{state} where id=#{id}
+    </update>
+
 </mapper>

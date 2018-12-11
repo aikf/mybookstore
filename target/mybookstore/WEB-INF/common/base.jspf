@@ -1,0 +1,12 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set value="${pageContext.request.contextPath }" var="bookstore" />
+
+<link rel="stylesheet" href="${bookstore}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="${bookstore}/static/css/sb-admin-2.css"/>
+<link rel="stylesheet" href="${bookstore}/static/css/metisMenu.min.css"/>
+<link rel="stylesheet" href="${bookstore}/static/css/font-awesome.min.css"/>
+<script src="${bookstore}/static/jquery-easyui-1.6.10/jquery.min.js"></script>
+<script src="${bookstore}/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="${bookstore}/static/js/sb-admin-2.js"></script>
+<script src="${bookstore}/static/js/metisMenu.min.js"></script>

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CategoryMapper {
 
-    void addCategory(Category category);
+    int addCategory(Category category);
 
     Category findCategoryById(String id);
 

@@ -31,10 +31,12 @@ public class BusinessServiceImpl implements BusinessService {
     @Autowired
     UserMapper userMapper;
 
-
+    /*
+    分类相关服务
+     */
     @Override
-    public void addCategory(Category category) {
-        categoryMapper.addCategory(category);
+    public int addCategory(Category category) {
+        return categoryMapper.addCategory(category);
     }
 
     @Override
@@ -47,6 +49,9 @@ public class BusinessServiceImpl implements BusinessService {
         return categoryMapper.getAllCategory();
     }
 
+    /*
+    图书相关服务
+     */
     @Override
     public void addBook(Book book) {
         bookMapper.addBook(book);
@@ -63,11 +68,20 @@ public class BusinessServiceImpl implements BusinessService {
         PageInfo pageInfo = new PageInfo();
         pageInfo.setList(list);
         pageInfo.setPagesize(info.getPageSize());
-        pageInfo.setCurrentpage(info.getCurrentPage());
+        pageInfo.setCurrentPage(info.getCurrentPage());
         pageInfo.setTotalrecord(bookMapper.getTotalRecord(info));
+        pageInfo.getPagebar();
         return pageInfo;
     }
 
+    @Override
+    public List<Book> getAllBook() {
+        return bookMapper.getAllBook();
+    }
+
+    /*
+    用户相关服务
+     */
     @Override
     public void addUser(User user) {
         userMapper.addUser(user);
@@ -79,10 +93,18 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     @Override
+    public User findUserByUsername(String username) {
+        return userMapper.findUserByUsername(username);
+    }
+
+    @Override
     public User findUserByPassword(String username, String password) {
         return userMapper.findUserByPassword(username, password);
     }
 
+    /*
+    订单相关服务
+     */
     @Override
     public void saveOrder(Cart cart, User user) {
         Order order = new Order();
@@ -91,6 +113,7 @@ public class BusinessServiceImpl implements BusinessService {
         order.setPrice(cart.getPrice());
         order.setState(false);
         order.setUser(user);
+        // 生成订单
         orderMapper.addOrder(order);
 
         Set<Map.Entry<String, CartItem>> entries = cart.getMap().entrySet();
@@ -102,6 +125,7 @@ public class BusinessServiceImpl implements BusinessService {
             orderitem.setBook(cartItem.getBook());
             orderitem.setPrice(cartItem.getPrice());
             orderitem.setQuantity(cartItem.getQuantity());
+            // 遍历添加订单对应的订单项
             orderitemMapper.addOrderitem(orderitem,order.getId());
         }
 
@@ -116,4 +140,10 @@ public class BusinessServiceImpl implements BusinessService {
     public List<Order> findOrderByState(boolean state) {
         return orderMapper.findOrderByState(state);
     }
+
+    @Override
+    public void updateOrderState(String state, String id) {
+        orderMapper.updateOrderState(state,id);
+    }
+
 }

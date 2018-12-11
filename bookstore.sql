@@ -43,3 +43,21 @@ create table orderitem(
   constraint book_id_FK foreign key(book_id) references book(id) ,
   constraint orders_id_FK foreign key(order_id) references orders(id)
 );
+
+create table manager (
+  id int primary key auto_increment ,
+  manager_name varchar (40) not null unique ,
+  password varchar (40) not null
+);
+
+create table manager_roles (
+  id int primary key auto_increment ,
+  manager_name varchar (40) not null ,
+  role_name varchar (40) not null
+);
+
+create table permissions (
+  id int primary key auto_increment ,
+  role_name varchar (40) not null,
+  permission varchar (40) not null
+);

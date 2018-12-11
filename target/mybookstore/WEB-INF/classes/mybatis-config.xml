@@ -4,15 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
-    <!--<settings>-->
-        <!--<setting name="mapUnderscoreToCamelCase" value="true"/>-->
-    <!--</settings>-->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+
     <typeAliases>
-        <package name="com.xym.pojo, com.xym.vo"/>
+        <package name="com.xym.pojo"/>
+        <package name="com.xym.vo"/>
     </typeAliases>
-    <plugins>
-        <plugin interceptor="com.github.pagehelper.PageInterceptor">
-            <property name="reasonable" value="true"/>
-        </plugin>
-    </plugins>
+
 </configuration>

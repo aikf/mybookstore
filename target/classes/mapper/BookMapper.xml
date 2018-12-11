@@ -18,10 +18,12 @@
         select * from book where id=#{id}
     </select>
 
-    <select id="findBookByCategory" parameterType="queryinfo" resultType="book">
+    <select id="findBookByCategory" parameterType="queryinfo" resultMap="myBook">
         select * from book
         <where>
+            <if test="categoryId != null and categoryId != ''">
             category_id=#{categoryId}
+            </if>
         </where>
         limit #{startIndex}, #{pageSize}
     </select>
@@ -29,8 +31,14 @@
     <select id="getTotalRecord" resultType="int">
         select count(*) from book
         <where>
-            category_id=#{categoryId}
+            <if test="categoryId != null and categoryId != ''">
+                category_id=#{categoryId}
+            </if>
         </where>
+    </select>
+
+    <select id="getAllBook" resultMap="myBook">
+        select * from book
     </select>
 
 </mapper>

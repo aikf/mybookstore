@@ -1,32 +1,33 @@
 package com.xym.vo;
 
 import com.xym.pojo.Book;
-import lombok.ToString;
+import lombok.Data;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * @ClassName PageInfo
- * @Description TODO
+ * @Description TODO 封装数据库查询结果及分页信息
  * @Author ak
  * @Date 2018/12/2 下午3:50
  * @Version 1.0
  **/
-@ToString
+@Data
 public class PageInfo {
 
     private List<Book> list;
     private int totalrecord;
     private int pagesize;
     private int totalpage;
-    private int currentpage;
+    private int currentPage;
 
     private int previouspage;
     private int nextpage;
     private int[] pagebar;
 
 
-    public List getList() {
+    public List<Book> getList() {
         return list;
     }
     public void setList(List list) {
@@ -54,15 +55,15 @@ public class PageInfo {
         return totalpage;
     }
 
-    public int getCurrentpage() {
-        return currentpage;
+    public int getCurrentPage() {
+        return currentPage;
     }
-    public void setCurrentpage(int currentpage) {
-        this.currentpage = currentpage;
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
     }
     public int getPreviouspage() {
-        if(this.currentpage-1>1){   //7-1
-            this.previouspage = this.currentpage-1;
+        if(this.currentPage -1>1){   //7-1
+            this.previouspage = this.currentPage -1;
         }else{
             this.previouspage = 1;
         }
@@ -70,10 +71,10 @@ public class PageInfo {
     }
 
     public int getNextpage() {
-        if(this.currentpage+1>this.totalpage){   //7+1
+        if(this.currentPage +1>this.totalpage){   //7+1
             this.nextpage = this.totalpage;
         }else{
-            this.nextpage = this.currentpage+1;
+            this.nextpage = this.currentPage +1;
         }
         return nextpage;
     }
@@ -82,12 +83,14 @@ public class PageInfo {
 
         int startpage;
         int endpage;
-        if(this.totalpage<=10){
+//        System.out.println(getTotalpage()); // ??? 加这一行就能正常显示页码条？
+        // 大坑！！！totalPage的值只有调用get方法的的时候才会计算
+        if(this.getTotalpage()<=10){
             startpage = 1;
             endpage = this.totalpage;
         }else{
-            startpage = this.currentpage -4;  //17   13,14,15,16,17,18,19,20,21,22
-            endpage = this.currentpage + 5;
+            startpage = this.currentPage -4;  //17   13,14,15,16,17,18,19,20,21,22
+            endpage = this.currentPage + 5;
 
             if(startpage<1){
                 startpage = 1;

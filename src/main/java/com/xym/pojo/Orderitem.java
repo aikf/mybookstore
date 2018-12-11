@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @ClassName Orderitem
- * @Description TODO
+ * @Description TODO 订单项
  * @Author ak
  * @Date 2018/12/2 上午10:15
  * @Version 1.0

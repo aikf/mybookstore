@@ -6,23 +6,39 @@
 
     <insert id="addBook">
         insert into book(id, name, price, author, image, description, category_id)
-        values(#{id},#{name},#{price},#{author},#{image},#{description},#{category_id})
+        values(#{id},#{name},#{price},#{author},#{image},#{description},#{category.id})
     </insert>
 
-    <select id="findBookById">
-        select * from book where id={#id}
+    <resultMap id="myBook" type="book">
+        <id column="id" property="id"/>
+        <association property="category" select="com.xym.dao.CategoryMapper.findCategoryById" column="category_id"/>
+    </resultMap>
+
+    <select id="findBookById" resultMap="myBook">
+        select * from book where id=#{id}
     </select>
 
-    <select id="findBookByCategory" parameterType="queryinfo" resultType="book">
+    <select id="findBookByCategory" parameterType="queryinfo" resultMap="myBook">
         select * from book
         <where>
-            category=#{categoryId}
+            <if test="categoryId != null and categoryId != ''">
+            category_id=#{categoryId}
+            </if>
         </where>
         limit #{startIndex}, #{pageSize}
     </select>
 
-    <select id="getTotalRecord" resultType="long">
+    <select id="getTotalRecord" resultType="int">
         select count(*) from book
+        <where>
+            <if test="categoryId != null and categoryId != ''">
+                category_id=#{categoryId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getAllBook" resultMap="myBook">
+        select * from book
     </select>
 
 </mapper>

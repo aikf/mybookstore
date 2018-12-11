@@ -1,16 +1,20 @@
 package com.xym.test;
 
+import com.xym.dao.ManagerMapper;
 import com.xym.pojo.*;
 import com.xym.service.BusinessService;
 import com.xym.vo.PageInfo;
 import com.xym.vo.QueryInfo;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @ClassName BusinessServiceTest
@@ -25,6 +29,9 @@ public class BusinessServiceTest {
 
     @Autowired
     BusinessService businessService;
+
+    @Autowired
+    ManagerMapper managerMapper;
 
     @Test
     public void addCategory(){
@@ -63,7 +70,7 @@ public class BusinessServiceTest {
 
     @Test
     public void findBook(){
-        Book book = businessService.findBookById("1");
+        Book book = businessService.findBookById("00eaa7f5-1648-44db-b106-5059c27dd151");
         System.out.println(book);
     }
 
@@ -72,9 +79,9 @@ public class BusinessServiceTest {
         QueryInfo queryInfo = new QueryInfo();
         queryInfo.setCurrentPage(1);
         queryInfo.setPageSize(3);
-        queryInfo.setCategoryId("1");
+        queryInfo.setCategoryId("45633714-fece-43bc-9aa0-7dc02b8405e8");
         PageInfo pageInfo = businessService.pageQuery(queryInfo);
-        System.out.println(pageInfo);
+        int[] pagebar = pageInfo.getPagebar();
     }
 
     @Test
@@ -121,5 +128,22 @@ public class BusinessServiceTest {
         Order order = businessService.findOrder("fa0480ad-d417-4043-9002-f5750a982d23");
         System.out.println(order);
     }
+
+    @Test
+    public void findPass(){
+//        Manager ak = managerMapper.findManager("ak");
+//        System.out.println(ak);
+//        Set<String> roles = managerMapper.findRoles("ak");
+//        System.out.println(roles);
+        Set<String> admin = managerMapper.findPermissions("ak");
+        System.out.println(admin);
+    }
+
+    @Test
+    public void getPass(){
+        Md5Hash md5Hash = new Md5Hash("888");
+        System.out.println(md5Hash.toString());
+    }
+
 
 }

@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @ClassName CartItem
- * @Description TODO
+ * @Description TODO 购物项
  * @Author ak
  * @Date 2018/12/2 下午4:30
  * @Version 1.0

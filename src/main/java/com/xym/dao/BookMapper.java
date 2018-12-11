@@ -13,4 +13,6 @@ public interface BookMapper {
     List<Book> findBookByCategory(QueryInfo info);
 
     Integer getTotalRecord(QueryInfo info);
+
+    List<Book> getAllBook();
 }

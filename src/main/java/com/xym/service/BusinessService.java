@@ -1,5 +1,6 @@
 package com.xym.service;
 
+import com.xym.db.DataSourceKey;
 import com.xym.pojo.*;
 import com.xym.vo.PageInfo;
 import com.xym.vo.QueryInfo;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public interface BusinessService {
 
-    void addCategory(Category category);
+    int addCategory(Category category);
 
     Category findCategroyById(String  id);
 
@@ -18,11 +19,15 @@ public interface BusinessService {
 
     Book findBookById(String id);
 
+    List<Book> getAllBook();
+
     PageInfo pageQuery(QueryInfo info);
 
     void addUser(User user);
 
     User findUserById(String id);
+
+    User findUserByUsername(String username);
 
     User findUserByPassword(String username, String password);
 
@@ -31,4 +36,8 @@ public interface BusinessService {
     Order findOrder(String id);
 
     List<Order> findOrderByState(boolean state);
+
+    void updateOrderState(String state, String id);
+
+
 }
