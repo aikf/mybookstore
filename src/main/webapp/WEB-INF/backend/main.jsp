@@ -32,10 +32,10 @@
             <a href="javascript:open('${bookstore}/admin/ordersFalseUI','待处理订单')" class="easyui-linkbutton" data-options="plain:true,width:150">待处理订单</a>
             <a href="javascript:open('${bookstore}/admin/deliverOrdersUI','已发货订单')" class="easyui-linkbutton" data-options="plain:true,width:150">已发货订单</a>
         </div>
-        <div title="数据库管理" data-options="iconCls:'icon-ok'" style="padding:15px;">
+        <%--<div title="数据库管理" data-options="iconCls:'icon-ok'" style="padding:15px;">
             <a href="javascript:open('${bookstore}/admin/ordersFalseUI','待处理订单')" class="easyui-linkbutton" data-options="plain:true,width:150">数据库备份</a>
             <a href="javascript:open('${bookstore}/admin/deliverOrdersUI','已发货订单')" class="easyui-linkbutton" data-options="plain:true,width:150">数据恢复</a>
-        </div>
+        </div>--%>
     </div>
 
 </div>

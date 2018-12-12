@@ -70,7 +70,7 @@ public class BusinessServiceImpl implements BusinessService {
         pageInfo.setPagesize(info.getPageSize());
         pageInfo.setCurrentPage(info.getCurrentPage());
         pageInfo.setTotalrecord(bookMapper.getTotalRecord(info));
-        pageInfo.getPagebar();
+        // pageInfo.getPagebar();
         return pageInfo;
     }
 

@@ -21,10 +21,20 @@
     <select id="findBookByCategory" parameterType="queryinfo" resultMap="myBook">
         select * from book
         <where>
+            <if test="name != null and name != ''">
+                name=#{name}
+            </if>
+            <if test="author != null and author != ''">
+                and author=#{author}
+            </if>
             <if test="categoryId != null and categoryId != ''">
-            category_id=#{categoryId}
+                and category_id=#{categoryId}
             </if>
         </where>
+        <if test="sort !=null and sort !=''">
+--             排序必须使用$
+            order by ${sort} ${order}
+        </if>
         limit #{startIndex}, #{pageSize}
     </select>
 

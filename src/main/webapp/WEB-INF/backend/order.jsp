@@ -18,17 +18,19 @@
 <h3>收货人信息：</h3>
 <table id="user"></table>
 <br>
-<a href="javascript:void(0)" class="easyui-linkbutton c4" onclick="deliver()" style="width:120px">确认发货</a>
-<div id="dlg" class="easyui-dialog" title="对话框" data-options="iconCls:'icon-ok',modal:true,closed:true" style="width:400px;height:200px;padding:10px">
+<c:if test="${!state}">
+    <a href="javascript:void(0)" class="easyui-linkbutton c4" onclick="deliver()" style="width:120px">确认发货</a>
+</c:if>
+<%--<div id="dlg" class="easyui-dialog" title="对话框" data-options="iconCls:'icon-ok',modal:true,closed:true" style="width:400px;height:200px;padding:10px">
 发货成功
-</div>
+</div>--%>
 
 </body>
 <script type="text/javascript">
     $('#order').datagrid({
         url:'${bookstore}/admin/order/${id}',
         columns:[[
-            {field:'book',title:'书名',width:100,formatter:formatName},
+            {field:'book',title:'书名',width:180,formatter:formatName},
             {field:'sp',title:'售价',width:100,formatter:formatP},
             {field:'quantity',title:'数量',width:100},
             {field:'price',title:'小计',width:100},
@@ -59,7 +61,9 @@
             type: "GET",
             success: function (reslut) {
                 if (reslut == "success") {
-                    $("#dlg").dialog('open');
+                    alert("发货成功");
+                    // $("#dlg").dialog('open');
+                    window.location.reload();
                 }else {
                     alert("发货失败");
                 }

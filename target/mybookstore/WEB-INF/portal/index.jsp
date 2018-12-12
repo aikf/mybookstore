@@ -116,7 +116,6 @@
                                 </button>
                             </span>
                         </div>
-                        <!-- /input-group -->
                     </li>
                     <c:forEach items="${categories}" var="category">
                         <li>

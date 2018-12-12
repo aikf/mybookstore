@@ -6,6 +6,7 @@ import com.xym.pojo.Book;
 import com.xym.pojo.Category;
 import com.xym.service.BusinessService;
 import com.xym.vo.PageInfo;
+import com.xym.vo.QueryBean;
 import com.xym.vo.QueryInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -73,13 +74,22 @@ public class BookController {
 
     @RequestMapping(value = "/aBooks",produces = "application/json;charset=utf-8")
     @ResponseBody
-    public String aBooks(QueryInfo info) throws JsonProcessingException {
-        // 拼装符合前端easyUI的json字符串
+    public String aBooks(QueryBean bean) throws JsonProcessingException {
+        QueryInfo info = new QueryInfo();
+        // 必须先设置pageSize
+        info.setPageSize(bean.getRows());
+        info.setCurrentPage(bean.getPage());
+        info.setSort(bean.getSort());
+        info.setOrder(bean.getOrder());
+        info.setName(bean.getName());
+        info.setAuthor(bean.getAuthor());
+        info.setCategoryId(bean.getCategoryId());
         PageInfo pageInfo = businessService.pageQuery(info);
         List<Book> list = pageInfo.getList();
         ObjectMapper mapper = new ObjectMapper();
         String listStr = mapper.writeValueAsString(list);
         int totalrecord = pageInfo.getTotalrecord();
+        // 拼装符合前端easyUI的json字符串
         StringBuilder jsonStr = new StringBuilder("{\"total\":" + totalrecord + ",\"rows\":");
         jsonStr.append(listStr);
         jsonStr.append("}");

@@ -77,11 +77,11 @@ public class BusinessServiceTest {
     @Test
     public void PageQuery(){
         QueryInfo queryInfo = new QueryInfo();
-        queryInfo.setCurrentPage(1);
-        queryInfo.setPageSize(3);
-        queryInfo.setCategoryId("45633714-fece-43bc-9aa0-7dc02b8405e8");
+        queryInfo.setCurrentPage(3);
+        queryInfo.setPageSize(10);
+//        queryInfo.setCategoryId("45633714-fece-43bc-9aa0-7dc02b8405e8");
         PageInfo pageInfo = businessService.pageQuery(queryInfo);
-        int[] pagebar = pageInfo.getPagebar();
+        System.out.println(pageInfo);
     }
 
     @Test

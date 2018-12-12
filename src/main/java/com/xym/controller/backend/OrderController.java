@@ -44,6 +44,9 @@ public class OrderController {
 
     @RequestMapping("/orderUI/{id}")
     public String orderUI(@PathVariable("id") String id, Model model){
+        Order order = service.findOrder(id);
+        boolean state = order.isState();
+        model.addAttribute("state",state);
         model.addAttribute("id", id);
         return "backend/order";
     }

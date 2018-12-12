@@ -47,7 +47,6 @@ public class BookStoreController {
      */
     @RequestMapping("/list")
     public String getList(QueryInfo info, Model model){
-
         PageInfo pageInfo = businessService.pageQuery(info);
         model.addAttribute("pageInfo", pageInfo);
         model.addAttribute("categoryId", info.getCategoryId());
